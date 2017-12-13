@@ -13,5 +13,19 @@ namespace Dictionary\Storage;
 
 interface DictionaryMapperInterface
 {
-    
+    /**
+     * Fetch all items
+     * 
+     * @return array
+     */
+    public function fetchAll();
+
+    /**
+     * Fetches item data by its associated id
+     * 
+     * @param string $id Contact ID
+     * @param boolean $withTranslations Whether to fetch translations or not
+     * @return array
+     */
+    public function fetchById($id, $withTranslations);
 }

@@ -31,4 +31,48 @@ final class DictionaryMapper extends AbstractMapper implements DictionaryMapperI
     {
         return DictionaryTranslationMapper::getTableName();
     }
+
+    /**
+     * Returns shared columns to be selected
+     * 
+     * @return array
+     */
+    private function getColumns()
+    {
+        return array(
+            self::getFullColumnName('id'),
+            self::getFullColumnName('alias'),
+            DictionaryTranslationMapper::getFullColumnName('lang_id'),
+            DictionaryTranslationMapper::getFullColumnName('value'),
+        );
+    }
+
+    /**
+     * Fetch all items
+     * 
+     * @return array
+     */
+    public function fetchAll()
+    {
+        $db = $this->createEntitySelect($this->getColumns())
+                   // Language ID constraint
+                   ->whereEquals(DictionaryTranslationMapper::getFullColumnName('lang_id'), $this->getLangId())
+                   // Sort by last IDs
+                   ->orderBy(self::getFullColumnName('id'))
+                   ->desc();
+
+        return $db->queryAll();
+    }
+
+    /**
+     * Fetches item data by its associated id
+     * 
+     * @param string $id Contact ID
+     * @param boolean $withTranslations Whether to fetch translations or not
+     * @return array
+     */
+    public function fetchById($id, $withTranslations)
+    {
+        return $this->findEntity($this->getColumns(), $id, $withTranslations);
+    }
 }
