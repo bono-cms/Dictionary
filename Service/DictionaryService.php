@@ -87,6 +87,17 @@ final class DictionaryService extends AbstractManager implements DictionaryServi
     }
 
     /**
+     * Delete many items at once by their IDs
+     * 
+     * @param array $ids
+     * @return boolean
+     */
+    public function deleteByIds(array $ids)
+    {
+        return $this->dictionaryMapper->deleteEntity($ids);
+    }
+
+    /**
      * Deletes item by its associated ID
      * 
      * @param int $id

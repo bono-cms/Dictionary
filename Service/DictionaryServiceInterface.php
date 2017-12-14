@@ -14,6 +14,14 @@ namespace Dictionary\Service;
 interface DictionaryServiceInterface
 {
     /**
+     * Delete many items at once by their IDs
+     * 
+     * @param array $ids
+     * @return boolean
+     */
+    public function deleteByIds(array $ids);
+
+    /**
      * Returns last dictionary id
      * 
      * @return integer
