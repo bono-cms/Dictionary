@@ -21,7 +21,7 @@ final class Dropper extends AbstractStorageDropper
     protected function getTables()
     {
         return array(
-            Dictionary::getTableName(),
+            DictionaryMapper::getTableName(),
             DictionaryTranslationMapper::getTableName()
         );
     }
