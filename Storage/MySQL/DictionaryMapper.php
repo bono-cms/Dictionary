@@ -40,10 +40,10 @@ final class DictionaryMapper extends AbstractMapper implements DictionaryMapperI
     private function getColumns()
     {
         return array(
-            self::getFullColumnName('id'),
-            self::getFullColumnName('alias'),
-            DictionaryTranslationMapper::getFullColumnName('lang_id'),
-            DictionaryTranslationMapper::getFullColumnName('value'),
+            self::column('id'),
+            self::column('alias'),
+            DictionaryTranslationMapper::column('lang_id'),
+            DictionaryTranslationMapper::column('value'),
         );
     }
 
@@ -56,9 +56,9 @@ final class DictionaryMapper extends AbstractMapper implements DictionaryMapperI
     {
         $db = $this->createEntitySelect($this->getColumns())
                    // Language ID constraint
-                   ->whereEquals(DictionaryTranslationMapper::getFullColumnName('lang_id'), $this->getLangId())
+                   ->whereEquals(DictionaryTranslationMapper::column('lang_id'), $this->getLangId())
                    // Sort by last IDs
-                   ->orderBy(self::getFullColumnName('id'))
+                   ->orderBy(self::column('id'))
                    ->desc();
 
         return $db->queryAll();
