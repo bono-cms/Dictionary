@@ -50,13 +50,19 @@ final class DictionaryMapper extends AbstractMapper implements DictionaryMapperI
     /**
      * Fetch all items
      * 
+     * @param mixed $langId Optional language ID constraint
      * @return array
      */
-    public function fetchAll()
+    public function fetchAll($langId = null)
     {
+        // If not provided, use default one
+        if (is_null($langId)) {
+            $langId = $this->getLangId();
+        }
+
         $db = $this->createEntitySelect($this->getColumns())
                    // Language ID constraint
-                   ->whereEquals(DictionaryTranslationMapper::column('lang_id'), $this->getLangId())
+                   ->whereEquals(DictionaryTranslationMapper::column('lang_id'), $langId)
                    // Sort by last IDs
                    ->orderBy(self::column('id'))
                    ->desc();

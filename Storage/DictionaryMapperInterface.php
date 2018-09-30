@@ -16,9 +16,10 @@ interface DictionaryMapperInterface
     /**
      * Fetch all items
      * 
+     * @param mixed $langId Optional language ID constraint
      * @return array
      */
-    public function fetchAll();
+    public function fetchAll($langId = null);
 
     /**
      * Fetches item data by its associated id
