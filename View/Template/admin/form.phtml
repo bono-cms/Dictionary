@@ -29,12 +29,9 @@ defined('KRYSTAL') or die;
                         <?php $this->loadPartial('language-name', array('language' => $language)); ?>
 
                         <div class="form-group">
-                            <label class="col-lg-2 control-label"><?php $this->show('Value'); ?></label>
-                            <div class="col-lg-10">
-                                <div class="input-group">
-                                    <?php echo Element::textarea(sprintf('translation[%s][value]', $language->getId()), $entity->getValue(), array('rows' => 3, 'class' => 'form-control', 'placeholder' => $this->translate('Name'))); ?>
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                                </div>
+                            <div class="input-group">
+                                <?php echo Element::textarea(sprintf('translation[%s][value]', $language->getId()), $entity->getValue(), array('rows' => 5, 'class' => 'form-control', 'placeholder' => $this->translate('Name'))); ?>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                             </div>
                         </div>
                     </div>
