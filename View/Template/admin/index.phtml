@@ -37,8 +37,8 @@ use Krystal\Form\Element;
                         <?php endif; ?>
 					</th>
 					<th class="text-center"><?php $this->show('#'); ?></th>
-					<th class="text-center"><?php $this->show('Name'); ?></th>
 					<th class="text-center"><?php $this->show('Value'); ?></th>
+					<th class="text-center"><?php $this->show('Alias'); ?></th>
 					<th class="text-center"><?php $this->show('Actions'); ?></th>
 				</tr>
 			</thead>
@@ -51,8 +51,8 @@ use Krystal\Form\Element;
                         <input type="checkbox" name="toDelete[<?php echo $item->getId(); ?>]" />
 					</td>
 					<td class="text-center text-muted"><?php echo $item->getId(); ?></td>
-					<td class="text-center"><?php echo $item->getAlias(); ?></td>
 					<td class="text-center"><?php echo $item->getValue(); ?></td>
+					<td class="text-center"><?php echo $item->getAlias(); ?></td>
 					<td class="text-center">
                         <a data-toggle="tooltip" data-placement="left" data-original-title="<?php $this->show('Edit this item'); ?>" data-button="edit" href="<?php echo $this->url('Dictionary:Admin:Dictionary@editAction', $item->getId()); ?>"><i class="glyphicon glyphicon-pencil"></i></a>
                         <a data-toggle="tooltip" data-placement="left" data-original-title="<?php $this->show('Remove this item'); ?>" data-button="delete" href="#" data-url="<?php echo $this->url('Dictionary:Admin:Dictionary@deleteAction', $item->getId()); ?>"><i class="glyphicon glyphicon-remove"></i></a>
