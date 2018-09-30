@@ -29,6 +29,14 @@ interface DictionaryServiceInterface
     public function getLastId();
 
     /**
+     * Fetches a list
+     * 
+     * @param mixed $langId Optional language ID constraint
+     * @return array
+     */
+    public function fetchList($langId = null);
+
+    /**
      * Fetch all items
      * 
      * @return array

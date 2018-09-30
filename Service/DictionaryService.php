@@ -61,6 +61,18 @@ final class DictionaryService extends AbstractManager implements DictionaryServi
     }
 
     /**
+     * Fetches a list
+     * 
+     * @param mixed $langId Optional language ID constraint
+     * @return array
+     */
+    public function fetchList($langId = null)
+    {
+        $rows = $this->dictionaryMapper->fetchAll($langId);
+        return ArrayUtils::arrayList($rows, 'alias', 'value');
+    }
+
+    /**
      * Fetch all items
      * 
      * @param mixed $langId Optional language ID constraint
