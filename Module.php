@@ -13,6 +13,7 @@ namespace Dictionary;
 
 use Cms\AbstractCmsModule;
 use Dictionary\Service\DictionaryService;
+use Dictionary\Service\SiteService;
 
 final class Module extends AbstractCmsModule
 {
@@ -21,8 +22,14 @@ final class Module extends AbstractCmsModule
      */
     public function getServiceProviders()
     {
+        $dictionaryService = new DictionaryService($this->getMapper('/Dictionary/Storage/MySQL/DictionaryMapper'));
+
+        // Grab current language
+        $langId = $this->getCmsModule()->getService('languageManager')->getCurrentId();
+
         return array(
-            'dictionaryService' => new DictionaryService($this->getMapper('/Dictionary/Storage/MySQL/DictionaryMapper'))
+            'dictionaryService' => $dictionaryService,
+            'siteService' => new SiteService($langId, $dictionaryService)
         );
     }
 }
