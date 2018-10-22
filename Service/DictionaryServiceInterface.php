@@ -61,18 +61,10 @@ interface DictionaryServiceInterface
     public function deleteById($id);
 
     /**
-     * Adds an item
+     * Saves an entity
      * 
      * @param array $input
      * @return boolean
      */
-    public function add(array $input);
-
-    /**
-     * Updates an item
-     * 
-     * @param array $input
-     * @return boolean
-     */
-    public function update(array $input);
+    public function save(array $input);
 }

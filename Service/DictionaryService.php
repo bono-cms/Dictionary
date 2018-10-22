@@ -127,30 +127,8 @@ final class DictionaryService extends AbstractManager implements DictionaryServi
      * @param array $input
      * @return boolean
      */
-    private function saveItem(array $input)
+    public function save(array $input)
     {
         return $this->dictionaryMapper->saveEntity($input['item'], $input['translation']);
-    }
-
-    /**
-     * Adds an item
-     * 
-     * @param array $input
-     * @return boolean
-     */
-    public function add(array $input)
-    {
-        return $this->saveItem($input);
-    }
-
-    /**
-     * Updates an item
-     * 
-     * @param array $input
-     * @return boolean
-     */
-    public function update(array $input)
-    {
-        return $this->saveItem($input);
     }
 }

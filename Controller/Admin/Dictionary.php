@@ -115,14 +115,14 @@ final class Dictionary extends AbstractController
     public function saveAction()
     {
         $data = $this->request->getPost();
+
         $service = $this->getModuleService('dictionaryService');
+        $service->save($data);
 
         if ($data['item']['id']) {
             $this->flashBag->set('success', 'Selected dictionary item has been updated successfully');
-            $service->update($data);
         } else {
             $this->flashBag->set('success', 'Selected dictionary item has been added successfully');
-            $service->add($data);
         }
 
         return true;
