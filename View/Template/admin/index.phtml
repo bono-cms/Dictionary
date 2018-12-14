@@ -1,8 +1,7 @@
-<?php defined('KRYSTAL') or die; ?>
 <?php
 
 use Krystal\Form\Element;
-
+defined('KRYSTAL') or die;
 ?>
 
 <div class="btn-toolbar">
@@ -11,7 +10,7 @@ use Krystal\Form\Element;
 		<i class="glyphicon glyphicon-list"></i> <?php $this->show('Menu'); ?> <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-		 <li><a href="<?php echo $this->url('Dictionary:Admin:Dictionary@addAction'); ?>"><i class="glyphicon glyphicon-phone-alt"></i> <?php $this->show('Add new item'); ?></a></li>
+		 <li><a href="<?php echo $this->url('Dictionary:Admin:Dictionary@addAction'); ?>"><i class="glyphicon glyphicon-file"></i> <?php $this->show('Add new item'); ?></a></li>
 		 <li class="divider"></li>
 		 <li class="dropdown-header"><?php $this->show('Actions'); ?></li>
 		 <?php if (!empty($items)): ?>
@@ -24,7 +23,7 @@ use Krystal\Form\Element;
 	</div>
 </div>
 
-<?php $this->loadPartial('items-per-page', array('caption' => 'Dictionary')); ?>
+<h2 class="page-header"><i class="glyphicon glyphicon-file"></i> <?php $this->show('Dictionary'); ?> <small>(<?= count($items); ?>)</small></h2>
 
 <form>
 	<div class="table-responsive">
