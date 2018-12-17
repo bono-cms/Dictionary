@@ -121,10 +121,10 @@ final class Dictionary extends AbstractController
 
         if ($data['item']['id']) {
             $this->flashBag->set('success', 'Selected dictionary item has been updated successfully');
+            return 1;
         } else {
             $this->flashBag->set('success', 'Selected dictionary item has been added successfully');
+            return $service->getLastId();
         }
-
-        return true;
     }
 }
