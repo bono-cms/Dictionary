@@ -33,49 +33,51 @@ defined('KRYSTAL') or die;
         </div>
     </div>
 
-    <div class="table-responsive">
-        <?= $this->widget(new GridViewWidget($items, array(
-            'batch' => true,
-            'pk' => 'id',
-            'tableClass' => 'table table-hover table-bordered table-striped table-condensed',
-            'columns' => array(
-                array(
-                    'column' => 'id',
-                    'label' => '#'
+    <form>
+        <div class="table-responsive">
+            <?= $this->widget(new GridViewWidget($items, array(
+                'batch' => true,
+                'pk' => 'id',
+                'tableClass' => 'table table-hover table-bordered table-striped table-condensed',
+                'columns' => array(
+                    array(
+                        'column' => 'id',
+                        'label' => '#'
+                    ),
+
+                    array(
+                        'column' => 'value'
+                    ),
+
+                    array(
+                        'column' => 'alias'
+                    )
                 ),
 
-                array(
-                    'column' => 'value'
-                ),
+                'actions' => array(
+                    'edit' => function($row){
+                        return Icon::edit(
+                            $this->url('Dictionary:Admin:Dictionary@editAction', $row['id']),
+                            $this->translate('Edit this item')
+                        );
+                    },
 
-                array(
-                    'column' => 'alias'
+                    'remove' => function($row){
+                        return Icon::remove(
+                            $this->url('Dictionary:Admin:Dictionary@deleteAction', $row['id']),
+                            $this->translate('Remove this item')
+                        );
+                    }
                 )
-            ),
+            ))); ?>
 
-            'actions' => array(
-                'edit' => function($row){
-                    return Icon::edit(
-                        $this->url('Dictionary:Admin:Dictionary@editAction', $row['id']),
-                        $this->translate('Edit this item')
-                    );
-                },
-
-                'remove' => function($row){
-                    return Icon::remove(
-                        $this->url('Dictionary:Admin:Dictionary@deleteAction', $row['id']),
-                        $this->translate('Remove this item')
-                    );
-                }
-            )
-        ))); ?>
-
-        <?php if (empty($items)): ?>
-        <div class="center-block">
-            <h2 class="text-center text-muted"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('No items'); ?></h2>
+            <?php if (empty($items)): ?>
+            <div class="center-block">
+                <h2 class="text-center text-muted"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('No items'); ?></h2>
+            </div>
+            <?php endif; ?>
         </div>
-        <?php endif; ?>
-    </div>
+    </form>
 
     <?php $this->loadPartial('paginator'); ?>
 
