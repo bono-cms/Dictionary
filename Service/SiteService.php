@@ -52,9 +52,9 @@ final class SiteService
     }
 
     /**
-     * Finds by alias
+     * Finds by alias or by id
      * 
-     * @param string $alias
+     * @param string|int $alias An alias or translation id
      * @return mixed
      */
     public function findByAlias($alias)
@@ -62,9 +62,18 @@ final class SiteService
         static $rows = null;
 
         if (is_null($rows)) {
-            $rows = $this->dictionaryService->fetchList($this->langId);
+            $rows = $this->dictionaryService->fetchAll($this->langId);
         }
 
-        return isset($rows[$alias]) ? $rows[$alias] : null;
+        // Column that contain translation, depending on type of provided alias
+        $column = is_numeric($alias) ? 'id' : 'alias';
+
+        foreach ($rows as $entity) {
+            if ($entity[$column] == $alias) {
+                return $entity->getValue();
+            }
+        }
+
+        return null;
     }
 }
