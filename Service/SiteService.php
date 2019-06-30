@@ -59,21 +59,6 @@ final class SiteService
      */
     public function findByAlias($alias)
     {
-        static $rows = null;
-
-        if (is_null($rows)) {
-            $rows = $this->dictionaryService->fetchAll($this->langId);
-        }
-
-        // Column that contain translation, depending on type of provided alias
-        $column = is_numeric($alias) ? 'id' : 'alias';
-
-        foreach ($rows as $entity) {
-            if ($entity[$column] == $alias) {
-                return $entity->getValue();
-            }
-        }
-
-        return null;
+        return $this->dictionaryService->findTranslation($alias, $this->langId);
     }
 }
