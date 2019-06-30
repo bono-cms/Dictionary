@@ -14,6 +14,7 @@ namespace Dictionary\Service;
 use Dictionary\Storage\DictionaryMapperInterface;
 use Krystal\Stdlib\ArrayUtils;
 use Krystal\Stdlib\VirtualEntity;
+use Krystal\Cache\MemoryCache;
 use Cms\Service\AbstractManager;
 
 final class DictionaryService extends AbstractManager implements DictionaryServiceInterface
@@ -58,6 +59,38 @@ final class DictionaryService extends AbstractManager implements DictionaryServi
     public function getLastId()
     {
         return $this->dictionaryMapper->getLastId();
+    }
+
+    /**
+     * Finds a translation in a stack
+     * 
+     * @param string|int $alias An alias or translation id
+     * @param int $langId Language id
+     * @return mixed
+     */
+    public function findTranslation($alias, $langId)
+    {
+        $cache = new MemoryCache();
+
+        // Avoid invoking query each time. Cache result once, and then just work with cached collection
+        if ($cache->has($langId)) {
+            $rows = $cache->get($langId);
+        } else {
+            $rows = $this->fetchAll($langId);
+            $cache->set($langId, $rows, null);
+        }
+
+        // Column that contain translation, depending on type of provided alias
+        $column = is_numeric($alias) ? 'id' : 'alias';
+
+        // Perform linear search to find a corresponding translation value
+        foreach ($rows as $entity) {
+            if ($entity[$column] == $alias) {
+                return $entity->getValue();
+            }
+        }
+
+        return null;
     }
 
     /**

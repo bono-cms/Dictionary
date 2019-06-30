@@ -29,6 +29,15 @@ interface DictionaryServiceInterface
     public function getLastId();
 
     /**
+     * Finds a translation in a stack
+     * 
+     * @param string|int $alias An alias or translation id
+     * @param int $langId Language id
+     * @return mixed
+     */
+    public function findTranslation($alias, $langId);
+
+    /**
      * Fetches a list
      * 
      * @param mixed $langId Optional language ID constraint
