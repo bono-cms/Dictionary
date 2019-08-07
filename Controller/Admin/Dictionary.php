@@ -28,7 +28,7 @@ final class Dictionary extends AbstractController
                    ->addOne('Dictionary');
 
         return $this->view->render('index', array(
-            'items' => $this->getModuleService('dictionaryService')->fetchAll()
+            'records' => $this->getModuleService('dictionaryService')->fetchAll()
         ));
     }
 
