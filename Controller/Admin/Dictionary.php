@@ -57,7 +57,7 @@ final class Dictionary extends AbstractController
      */
     public function addAction()
     {
-        return $this->createForm(new VirtualEntity(), 'Add an item');
+        return $this->createForm(new VirtualEntity(), 'Add an value');
     }
 
     /**
@@ -68,10 +68,12 @@ final class Dictionary extends AbstractController
      */
     public function editAction($id)
     {
-        $item = $this->getModuleService('dictionaryService')->fetchById($id, true);
+        $value = $this->getModuleService('dictionaryService')->fetchById($id, true);
 
-        if ($item !== false) {
-            return $this->createForm($item, 'Edit the item');
+        if ($value !== false) {
+
+            $title = $this->getCurrentProperty($value, 'value');
+            return $this->createForm($value, $this->translator->translate('Edit the value "%s"', $title));
         } else {
             return false;
         }
