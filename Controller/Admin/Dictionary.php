@@ -41,6 +41,9 @@ final class Dictionary extends AbstractController
      */
     private function createForm($item, $title)
     {
+        // Load view plugins
+        $this->view->getPluginBag()->load(array('preview', $this->getWysiwygPluginName()));
+
         // Append breadcrumbs
         $this->view->getBreadcrumbBag()->addOne('Dictionary', 'Dictionary:Admin:Dictionary@indexAction')
                                        ->addOne($title);

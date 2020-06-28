@@ -29,7 +29,7 @@ defined('KRYSTAL') or die;
 
                     <div class="form-group">
                         <div class="input-group">
-                            <?php echo Element::textarea(sprintf('translation[%s][value]', $language->getId()), $entity->getValue(), array('rows' => 5, 'class' => 'form-control', 'placeholder' => $this->translate('Name'))); ?>
+                            <?php echo Element::textarea(sprintf('translation[%s][value]', $language->getId()), $entity->getValue(), array('rows' => 5, 'class' => 'form-control', 'placeholder' => $this->translate('Name'), 'data-wysiwyg' => $entity->getWysiwyg() ? 'true' : null)); ?>
                             <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                         </div>
                     </div>
@@ -40,6 +40,13 @@ defined('KRYSTAL') or die;
 
         <div class="tab-pane fade" id="configuration" role="tabpanel">
             <?php echo Element::hidden('item[id]', $entity->getId()); ?>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label"><?php $this->show('WYSIWYG'); ?></label>
+                <div class="col-lg-10">
+                    <?php echo Element::checkbox('item[wysiwyg]', $entity->getWysiwyg()); ?>
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="col-lg-2 control-label"><?php $this->show('Alias'); ?></label>
