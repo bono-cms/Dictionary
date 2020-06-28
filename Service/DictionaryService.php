@@ -15,6 +15,7 @@ use Dictionary\Storage\DictionaryMapperInterface;
 use Krystal\Stdlib\ArrayUtils;
 use Krystal\Stdlib\VirtualEntity;
 use Krystal\Cache\MemoryCache;
+use Krystal\Templating\StringTemplate;
 use Cms\Service\AbstractManager;
 
 final class DictionaryService extends AbstractManager implements DictionaryServiceInterface
@@ -65,10 +66,11 @@ final class DictionaryService extends AbstractManager implements DictionaryServi
      * Finds a translation in a stack
      * 
      * @param string|int $alias An alias or translation id
+     * @param array $vars Optional string variables
      * @param int $langId Language id
      * @return mixed
      */
-    public function findTranslation($alias, $langId)
+    public function findTranslation($alias, array $vars = array(), $langId)
     {
         $cache = new MemoryCache();
 
@@ -83,14 +85,17 @@ final class DictionaryService extends AbstractManager implements DictionaryServi
         // Column that contain translation, depending on type of provided alias
         $column = is_numeric($alias) ? 'id' : 'alias';
 
+        $output = null;
+
         // Perform linear search to find a corresponding translation value
         foreach ($rows as $entity) {
             if ($entity[$column] == $alias) {
-                return $entity->getValue();
+                $output = $entity->getValue();
+                break;
             }
         }
 
-        return null;
+        return StringTemplate::template($output, $vars);
     }
 
     /**

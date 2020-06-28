@@ -44,21 +44,23 @@ final class SiteService
      * Syntax sugar
      * 
      * @param string $alias
+     * @param array $vars Optional string variables
      * @return mixed
      */
-    public function __invoke($alias)
+    public function __invoke($alias, array $vars = array())
     {
-        return $this->findByAlias($alias);
+        return $this->findByAlias($alias, $vars);
     }
 
     /**
      * Finds by alias or by id
      * 
      * @param string|int $alias An alias or translation id
+     * @param array $vars Optional string variables
      * @return mixed
      */
-    public function findByAlias($alias)
+    public function findByAlias($alias, array $vars = array())
     {
-        return $this->dictionaryService->findTranslation($alias, $this->langId);
+        return $this->dictionaryService->findTranslation($alias, $vars, $this->langId);
     }
 }

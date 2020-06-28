@@ -32,10 +32,11 @@ interface DictionaryServiceInterface
      * Finds a translation in a stack
      * 
      * @param string|int $alias An alias or translation id
+     * @param array $vars Optional string variables
      * @param int $langId Language id
      * @return mixed
      */
-    public function findTranslation($alias, $langId);
+    public function findTranslation($alias, array $vars = array(), $langId);
 
     /**
      * Fetches a list
