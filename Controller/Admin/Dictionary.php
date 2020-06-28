@@ -74,9 +74,7 @@ final class Dictionary extends AbstractController
         $value = $this->getModuleService('dictionaryService')->fetchById($id, true);
 
         if ($value !== false) {
-
-            $title = $this->getCurrentProperty($value, 'value');
-            return $this->createForm($value, $this->translator->translate('Edit the value "%s"', $title));
+            return $this->createForm($value, $this->translator->translate('Edit the value "%s"', $id));
         } else {
             return false;
         }
