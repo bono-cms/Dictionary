@@ -2,7 +2,8 @@
 DROP TABLE IF EXISTS `bono_module_cms_dictionary`;
 CREATE TABLE `bono_module_cms_dictionary` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `alias` varchar(255) COMMENT 'ID alias'
+    `alias` varchar(255) COMMENT 'ID alias',
+    `wysiwyg` BOOLEAN NOT NULL COMMENT 'Whether enable wysiwyg'
 ) DEFAULT CHARSET = UTF8;
 
 DROP TABLE IF EXISTS `bono_module_cms_dictionary_translations`;

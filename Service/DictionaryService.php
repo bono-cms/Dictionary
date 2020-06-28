@@ -46,6 +46,7 @@ final class DictionaryService extends AbstractManager implements DictionaryServi
         $entity = new VirtualEntity();
         $entity->setId($row['id'], VirtualEntity::FILTER_INT)
                ->setLangId($row['lang_id'], VirtualEntity::FILTER_INT)
+               ->setWysiwyg($row['wysiwyg'], VirtualEntity::FILTER_BOOL)
                ->setAlias($row['alias'], VirtualEntity::FILTER_TAGS)
                ->setValue($row['value']);
 

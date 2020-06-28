@@ -42,6 +42,7 @@ final class DictionaryMapper extends AbstractMapper implements DictionaryMapperI
         return array(
             self::column('id'),
             self::column('alias'),
+            self::column('wysiwyg'),
             DictionaryTranslationMapper::column('lang_id'),
             DictionaryTranslationMapper::column('value'),
         );
