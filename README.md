@@ -1,7 +1,12 @@
-# Dictionary
-Manage any labels and captions on your site
+Dictionary
+======
 
+This module is designed to translate global captions, headers, and other text elements across your website.
 
-# Credits
+## Usage example
 
-Icons made by [Freepik](https://www.freepik.com/ "Freepik") from [www.flaticon.com](https://www.flaticon.com/ "Flaticon") is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/ "Creative Commons BY 3.0")
+Usage is straightforward—just create a dictionary item in the administration panel and render it wherever you need it in your template.
+
+    <p>
+        <?= $dictionary('..alias or id..'); 
+    </p>
