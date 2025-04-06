@@ -71,7 +71,7 @@ final class DictionaryService extends AbstractManager implements DictionaryServi
      * @param int $langId Language id
      * @return mixed
      */
-    public function findTranslation($alias, array $vars = array(), $langId)
+    public function findTranslation($alias, array $vars, $langId)
     {
         $cache = new MemoryCache();
 
