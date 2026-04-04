@@ -8,74 +8,85 @@ defined('KRYSTAL') or die;
 
 ?>
 
-<div class="btn-toolbar">
+<div class="btn-toolbar mb-3">
     <div class="btn-group">
-        <?php $this->loadPartial('menu', array(
-            'items' => array(
+        <?php $this->loadPartial('menu', [
+            'items' => [
                 'Dictionary:Admin:Dictionary@addAction' => 'Add new item',
-            ),
-            'actions' => array(
+            ],
+            'actions' => [
                 'data' => $records,
                 'delete' => 'Dictionary:Admin:Dictionary@deleteAction',
-            )
-        )); ?>
+            ]
+        ]); ?>
     </div>
 </div>
 
-<div class="card">
-    <div class="card-header">
-        <h4 class="card-title"><?php $this->show('Dictionary'); ?> <small>(<?= count($records); ?>)</small></h4>
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h5 class="card-title mb-0">
+            <i class="bi bi-journal-text me-2"></i> <?= $this->translate('Dictionary'); ?> 
+            <span class="badge bg-secondary rounded-pill ms-1"><?= count($records); ?></span>
+        </h5>
     </div>
 
     <form>
         <div class="table-responsive">
-            <?= $this->widget(new GridViewWidget($records, array(
+            <?= $this->widget(new GridViewWidget($records, [
                 'batch' => true,
                 'pk' => 'id',
-                'tableClass' => 'table table-hover table-bordered table-striped table-condensed',
-                'columns' => array(
-                    array(
+                'tableClass' => 'table table-hover table-striped mb-0',
+                'columns' => [
+                    [
                         'column' => 'id',
-                        'label' => '#'
-                    ),
-
-                    array(
+                        'label' => '#',
+                        'attributes' => [
+                            'class' => 'text-center text-muted',
+                            'style' => 'width: 70px;'
+                        ]
+                    ],
+                    [
                         'column' => 'value',
-                        'attributes' => array(
-                            'class' => null
-                        )
-                    ),
-
-                    array(
-                        'column' => 'alias'
-                    )
-                ),
-
-                'actions' => array(
-                    'edit' => function($row){
+                        'label' => 'Value',
+                        'attributes' => [
+                            'class' => 'fw-bold'
+                        ]
+                    ],
+                    [
+                        'column' => 'alias',
+                        'label' => 'Alias',
+                        'attributes' => [
+                            'class' => 'text-muted small'
+                        ]
+                    ]
+                ],
+                'actions' => [
+                    function($row){
                         return Icon::edit(
                             $this->url('Dictionary:Admin:Dictionary@editAction', $row['id']),
                             $this->translate('Edit this item')
                         );
                     },
-
-                    'remove' => function($row){
+                    function($row){
                         return Icon::remove(
                             $this->url('Dictionary:Admin:Dictionary@deleteAction', $row['id']),
                             $this->translate('Remove this item')
                         );
                     }
-                )
-            ))); ?>
+                ]
+            ])); ?>
 
             <?php if (empty($records)): ?>
-            <div class="center-block">
-                <h2 class="text-center text-muted"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('No items'); ?></h2>
+            <div class="card-body py-5 text-center">
+                <h2 class="text-muted"><i class="bi bi-search"></i> <?= $this->translate('No items'); ?></h2>
             </div>
             <?php endif; ?>
         </div>
     </form>
 
-    <?php $this->loadPartial('paginator'); ?>
-
+    <?php if (isset($paginator)): ?>
+    <div class="card-footer bg-white">
+        <?php $this->loadPartial('paginator'); ?>
+    </div>
+    <?php endif; ?>
 </div>
