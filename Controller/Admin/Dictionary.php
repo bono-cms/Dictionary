@@ -27,9 +27,9 @@ final class Dictionary extends AbstractController
         $this->view->getBreadcrumbBag()
                    ->addOne('Dictionary');
 
-        return $this->view->render('index', array(
+        return $this->view->render('index', [
             'records' => $this->getModuleService('dictionaryService')->fetchAll()
-        ));
+        ]);
     }
 
     /**
@@ -42,15 +42,15 @@ final class Dictionary extends AbstractController
     private function createForm($item, $title)
     {
         // Load view plugins
-        $this->view->getPluginBag()->load(array('preview', $this->getWysiwygPluginName()));
+        $this->view->getPluginBag()->load(['preview', $this->getWysiwygPluginName()]);
 
         // Append breadcrumbs
         $this->view->getBreadcrumbBag()->addOne('Dictionary', 'Dictionary:Admin:Dictionary@indexAction')
-                                       ->addOne($title);
+                                     ->addOne($title);
 
-        return $this->view->render('form', array(
+        return $this->view->render('form', [
             'item' => $item
-        ));
+        ]);
     }
 
     /**
@@ -107,7 +107,9 @@ final class Dictionary extends AbstractController
             $this->flashBag->set('success', 'Selected element has been removed successfully');
         }
 
-        return 1;
+        return $this->json([
+            'refresh' => true
+        ]);
     }
 
     /**
@@ -124,10 +126,14 @@ final class Dictionary extends AbstractController
 
         if ($data['item']['id']) {
             $this->flashBag->set('success', 'Selected dictionary item has been updated successfully');
-            return 1;
+            return $this->json([
+                'refresh' => true
+            ]);
         } else {
             $this->flashBag->set('success', 'Selected dictionary item has been added successfully');
-            return $service->getLastId();
+            return $this->json([
+                'redirect' => $this->createUrl('Dictionary:Admin:Dictionary@editAction', [$service->getLastId()]),
+            ]);
         }
     }
 }
